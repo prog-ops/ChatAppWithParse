@@ -59,9 +59,31 @@ public class Chat extends CustomActivity {
         setTouchNClick(b.BTNSEND.getId());
 
         buddy = getIntent().getStringExtra(Const.EXTRA_DATA);
-        getActionBar().setTitle(buddy);
+        getSupportActionBar().setTitle(buddy);
 
         handler = new Handler();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isRunning = true;
+        loadConversationList();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isRunning = false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+
+        if (view.getId() == b.BTNSEND.getId()) {
+            sendMessage();
+        }
     }
 
     /**
@@ -119,28 +141,6 @@ public class Chat extends CustomActivity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        isRunning = true;
-        loadConversationList();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        isRunning = false;
-    }
-
-    @Override
-    public void onClick(View view) {
-        super.onClick(view);
-
-        if (view.getId() == b.BTNSEND.getId()) {
-            sendMessage();
-        }
     }
 
     /**
@@ -209,11 +209,11 @@ public class Chat extends CustomActivity {
         public View getView(int position, View view, ViewGroup viewGroup) {
             Conversation conversation = getItem(position);
             if (conversation.isSent()) {
-                view = LayoutInflater.from(view.getContext()).inflate(
+                view = getLayoutInflater().inflate(
                         R.layout.chat_item_sent, null);
             }
             if (conversation.isSent()) {
-                view = LayoutInflater.from(view.getContext()).inflate(
+                view = getLayoutInflater().inflate(
                         R.layout.chat_item_rcv, null);
             }
 
