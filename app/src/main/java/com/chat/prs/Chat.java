@@ -124,7 +124,8 @@ public class Chat extends CustomActivity {
                         );
                         convList.add(c);
 
-                        if (lastMsgDate == null | lastMsgDate.before(c.getDate())) {
+                        if (lastMsgDate == null |
+                                lastMsgDate.before(c.getDate())) {
                             lastMsgDate = c.getDate();
                             adp.notifyDataSetChanged();
                         }
@@ -218,9 +219,16 @@ public class Chat extends CustomActivity {
             }
 
             TextView label = view.findViewById(R.id.TV_LABEL1);
-            label.setText(DateUtils.getRelativeDateTimeString(Chat.this, conversation.getDate().getTime(), DateUtils.SECOND_IN_MILLIS, DateUtils.DAY_IN_MILLIS, 0));
+            label.setText(DateUtils.getRelativeDateTimeString(
+                    Chat.this,
+                    conversation.getDate().getTime(),
+                    DateUtils.SECOND_IN_MILLIS,
+                    DateUtils.DAY_IN_MILLIS,
+                    0));
+
             label = view.findViewById(R.id.TV_LABEL2);
             label.setText(conversation.getMessage());
+
             label = view.findViewById(R.id.TV_LABEL3);
             if (conversation.isSent()) {
                 if (conversation.getStatus() == Conversation.STATUS_SENT) {
