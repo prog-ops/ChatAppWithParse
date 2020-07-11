@@ -1,8 +1,8 @@
 package com.chat.prs;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,11 +34,13 @@ public class MainActivity extends CustomActivity {
         View view = b.getRoot();
         setContentView(view);
 
-        /*ActionBar actionBar = getActionBar();
+//        ActionBar actionBar = getActionBar();
+        /*ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }*/
-        getActionBar().setDisplayHomeAsUpEnabled(false);
+//        getActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         updateUserStatus(true);
     }
@@ -66,15 +68,21 @@ public class MainActivity extends CustomActivity {
         pd.setCancelable(false);
         pd.show();
 
-        ParseUser.getQuery().whereNotEqualTo("username", user.getUsername())
+        ParseUser.getQuery().whereNotEqualTo(
+                "username",
+                user.getUsername()
+        )
                 .findInBackground(new FindCallback<ParseUser>() {
                     @Override
                     public void done(List<ParseUser> objects, ParseException e) {
                         pd.dismiss();
 
                         if (objects != null) {
+
                             if (objects.size() == 0) {
-                                Toast.makeText(MainActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "No user found", Toast.LENGTH_SHORT).show();
+
+                            } else {
 
                                 uList = new ArrayList<>(objects);
 //                                b.RVUSERLIST.setAdapter(new UserAdapterRv());
@@ -83,15 +91,22 @@ public class MainActivity extends CustomActivity {
                                     @Override
                                     public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
                                         startActivity(new Intent(
-                                                MainActivity.this,
-                                                Chat.class
-                                        ).putExtra(Const.EXTRA_DATA, uList.get(pos).getUsername()));
+                                                MainActivity.this, Chat.class)
+                                                .putExtra(
+                                                        Const.EXTRA_DATA,
+                                                        uList.get(pos).getUsername()));
                                     }
                                 });
-                            } else {
-                                // utils show dialog
-                                Toast.makeText(MainActivity.this, "error user "+e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
+
+                        } else {
+
+                            // utils show dialog
+                            e.printStackTrace();
+
+//                                String s = e.getMessage();
+//                                Toast.makeText(MainActivity.this, "error user "+s, Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
@@ -127,7 +142,8 @@ public class MainActivity extends CustomActivity {
             TextView label = (TextView) view;
             label.setText(c.getUsername());
             label.setCompoundDrawablesWithIntrinsicBounds(
-                    c.getBoolean("online") ?
+                    c.getBoolean("online")
+                            ?
                             R.drawable.online : R.drawable.offline,
                     0,
                     R.drawable.arrow,

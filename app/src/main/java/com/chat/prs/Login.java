@@ -25,17 +25,16 @@ public class Login extends CustomActivity {
 
         setTouchNClick(b.LOGIN.getId());
         setTouchNClick(b.REG.getId());
-
-
     }
 
 
     @Override
     public void onClick(View view) {
-//        super.onClick(view);
+        super.onClick(view);
 
         if (view.getId() == b.REG.getId()) {
             startActivityForResult(new Intent(this, Register.class), 10);
+
         } else {
             final String u = b.EDITUSERNAME.getText().toString();
             String p = b.EDITPASSWORD.getText().toString();

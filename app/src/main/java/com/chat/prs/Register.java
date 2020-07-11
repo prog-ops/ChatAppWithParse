@@ -24,7 +24,6 @@ public class Register extends CustomActivity {
         setContentView(view);
 
         setTouchNClick(b.REG.getId());
-
     }
 
     @Override
@@ -62,6 +61,7 @@ public class Register extends CustomActivity {
                     finish();
                 } else {
                     // utils show dialog error signup
+                    e.printStackTrace();
                     Toast.makeText(Register.this, "error "+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
