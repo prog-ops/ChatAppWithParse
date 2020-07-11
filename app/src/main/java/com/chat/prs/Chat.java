@@ -126,8 +126,14 @@ public class Chat extends CustomActivity {
                         );
                         convList.add(c);
 
-                        if (lastMsgDate == null |
+                        //! asli
+                        /*if (lastMsgDate == null |
                                 lastMsgDate.before(c.getDate())) {
+                            lastMsgDate = c.getDate();
+                        }*/
+                        if (lastMsgDate == null) {
+                            lastMsgDate = c.getDate();
+                        } else if (lastMsgDate.before(c.getDate())){
                             lastMsgDate = c.getDate();
                         }
                         adp.notifyDataSetChanged();
@@ -214,8 +220,7 @@ public class Chat extends CustomActivity {
             if (conversation.isSent()) {
                 view = getLayoutInflater().inflate(
                         R.layout.chat_item_sent, null);
-            }
-            if (conversation.isSent()) {
+            } else {
                 view = getLayoutInflater().inflate(
                         R.layout.chat_item_rcv, null);
             }
