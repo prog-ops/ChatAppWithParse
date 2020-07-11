@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 
+// in tutorial this activity is not declared in manifest
 public class CustomActivity extends FragmentActivity implements View.OnClickListener {
     public static final TouchEffect TOUCH = new TouchEffect();
 

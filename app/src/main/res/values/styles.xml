@@ -7,10 +7,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppCompat" parent="AppTheme">
+        <item name="homeAsUpIndicator">@drawable/arrow</item>
+    </style>
+
 <!--    minWidth and minHeight prevents button to stretching -->
     <style name="btn" parent="Widget.AppCompat.Button">
         <item name="android:minHeight">1dp</item>
         <item name="android:minWidth">1dp</item>
+    </style>
+
+<!--    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">-->
+    <style name="FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
 </resources>

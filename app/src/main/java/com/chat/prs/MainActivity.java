@@ -2,6 +2,7 @@ package com.chat.prs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //* MainActivity is UserList
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends CustomActivity {
     UserListBinding b;
     private ArrayList<ParseUser> uList;
     public static ParseUser user;
@@ -33,7 +34,11 @@ public class MainActivity extends AppCompatActivity {
         View view = b.getRoot();
         setContentView(view);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        /*ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }*/
+        getActionBar().setDisplayHomeAsUpEnabled(false);
 
         updateUserStatus(true);
     }

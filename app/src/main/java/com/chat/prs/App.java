@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.parse.Parse;
 import com.parse.Parse.Configuration;
+import com.parse.ParseObject;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -43,6 +44,11 @@ public class App extends Application {
                 .server("https://parseapi.back4app.com/")
                 .build()
         );
+
+        // New test creation of object below
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
 
         // tutorial, deprecated
         /*Parse.initialize(
