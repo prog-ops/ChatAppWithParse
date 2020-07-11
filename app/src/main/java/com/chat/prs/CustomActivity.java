@@ -24,16 +24,17 @@ public class CustomActivity extends FragmentActivity implements View.OnClickList
         final ActionBar actionBar = getActionBar();
         if (actionBar == null) {
             return;
+        } else {
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+            actionBar.setDisplayUseLogoEnabled(true);
+            actionBar.setLogo(R.drawable.icon);
+            actionBar.setBackgroundDrawable(getResources().getDrawable(
+                    R.drawable.actionbar
+            ));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
         }
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setLogo(R.drawable.icon);
-        actionBar.setBackgroundDrawable(getResources().getDrawable(
-                R.drawable.actionbar
-        ));
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
     }
 
     public View setTouchNClick(int id) {
