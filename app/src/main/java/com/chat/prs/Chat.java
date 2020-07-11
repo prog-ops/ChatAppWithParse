@@ -115,7 +115,9 @@ public class Chat extends CustomActivity {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (objects != null & objects.size() > 0) {
+
                     for (int i = objects.size() - 1; i >= 0; i--) {
+
                         ParseObject po = objects.get(i);
                         Conversation c = new Conversation(
                                 po.getString("message"),
@@ -127,19 +129,19 @@ public class Chat extends CustomActivity {
                         if (lastMsgDate == null |
                                 lastMsgDate.before(c.getDate())) {
                             lastMsgDate = c.getDate();
-                            adp.notifyDataSetChanged();
+                        }
+                        adp.notifyDataSetChanged();
+                    }
+                }
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isRunning) {
+                            loadConversationList();
                         }
                     }
-
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (isRunning) {
-                                loadConversationList();
-                            }
-                        }
-                    }, 1000);
-                }
+                }, 1000);
             }
         });
     }
